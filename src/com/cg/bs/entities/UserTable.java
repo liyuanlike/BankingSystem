@@ -1,48 +1,62 @@
 package com.cg.bs.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class UserTable {
-	
-	private int Account_ID, user_id;
-	private String login_password, secret_question, Transaction_password, lock_status;
+	@Id
+	@Column(name="user_id")
+	private int user_id;
+	private String login_password, secret_question, Transaction_password, lock_status, Pancard, role;
 	
 	
 	public UserTable() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 
-	public UserTable(int account_ID, int user_id, String login_password,
+	
+
+
+	public UserTable(int user_id, String login_password,
 			String secret_question, String transaction_password,
-			String lock_status) {
+			String lock_status, String pancard, String role) {
 		super();
-		Account_ID = account_ID;
 		this.user_id = user_id;
 		this.login_password = login_password;
 		this.secret_question = secret_question;
 		Transaction_password = transaction_password;
 		this.lock_status = lock_status;
+		Pancard = pancard;
+		this.role = role;
 	}
+
+
+
 
 
 	@Override
 	public String toString() {
-		return "UserTable [Account_ID=" + Account_ID + ", user_id=" + user_id
-				+ ", login_password=" + login_password + ", secret_question="
-				+ secret_question + ", Transaction_password="
-				+ Transaction_password + ", lock_status=" + lock_status + "]";
+		return "UserTable [user_id=" + user_id + ", login_password="
+				+ login_password + ", secret_question=" + secret_question
+				+ ", Transaction_password=" + Transaction_password
+				+ ", lock_status=" + lock_status + ", Pancard=" + Pancard
+				+ ", role=" + role + "]";
 	}
 
 
-	public int getAccount_ID() {
-		return Account_ID;
+
+
+
+	public String getRole() {
+		return role;
 	}
 
-
-	public void setAccount_ID(int account_ID) {
-		Account_ID = account_ID;
+	public void setRole(String role) {
+		this.role = role;
 	}
-
 
 	public int getUser_id() {
 		return user_id;
@@ -92,6 +106,19 @@ public class UserTable {
 	public void setLock_status(String lock_status) {
 		this.lock_status = lock_status;
 	}
+
+
+	public String getPancard() {
+		return Pancard;
+	}
+
+
+	public void setPancard(String pancard) {
+		Pancard = pancard;
+	}
+
+	
+
 	
 	
 

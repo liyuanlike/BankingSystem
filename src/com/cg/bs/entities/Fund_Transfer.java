@@ -1,21 +1,24 @@
 package com.cg.bs.entities;
 
+import java.sql.Date;
+
 public class Fund_Transfer {
 
 	private int FundTransfer_ID,Account_ID, Payee_Account_ID, Transfer_Amount;
-
+	Date Date_Of_Transfer;
+	
 	public Fund_Transfer() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Fund_Transfer(int fundTransfer_ID, int account_ID,
-			int payee_Account_ID, int transfer_Amount) {
+			int payee_Account_ID, int transfer_Amount, Date date_Of_Transfer) {
 		super();
 		FundTransfer_ID = fundTransfer_ID;
 		Account_ID = account_ID;
 		Payee_Account_ID = payee_Account_ID;
 		Transfer_Amount = transfer_Amount;
+		Date_Of_Transfer = date_Of_Transfer;
 	}
 
 	@Override
@@ -50,6 +53,14 @@ public class Fund_Transfer {
 		Payee_Account_ID = payee_Account_ID;
 	}
 
+	public Date getDate_Of_Transfer() {
+		return Date_Of_Transfer;
+	}
+
+	public void setDate_Of_Transfer(Date date_Of_Transfer) {
+		Date_Of_Transfer = date_Of_Transfer;
+	}
+
 	public int getTransfer_Amount() {
 		return Transfer_Amount;
 	}
@@ -57,5 +68,6 @@ public class Fund_Transfer {
 	public void setTransfer_Amount(int transfer_Amount) {
 		Transfer_Amount = transfer_Amount;
 	}
+
 	
 }

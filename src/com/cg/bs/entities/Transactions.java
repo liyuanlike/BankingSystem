@@ -1,10 +1,12 @@
 package com.cg.bs.entities;
 
+import java.sql.Date;
+
 public class Transactions {
 
 	private int Transaction_ID, TranAmount, Account_No;
 	private String Tran_description, TransactionType;
-	
+	Date DateofTransaction;
 	
 	public int getTransaction_ID() {
 		return Transaction_ID;
@@ -55,20 +57,28 @@ public class Transactions {
 	}
 	
 	
+
+	
+	
+	public Date getDateofTransaction() {
+		return DateofTransaction;
+	}
+	public void setDateofTransaction(Date dateofTransaction) {
+		DateofTransaction = dateofTransaction;
+	}
 	public Transactions(int transaction_ID, int tranAmount, int account_No,
-			String tran_description, String transactionType) {
+			String tran_description, String transactionType,
+			Date dateofTransaction) {
 		super();
 		Transaction_ID = transaction_ID;
 		TranAmount = tranAmount;
 		Account_No = account_No;
 		Tran_description = tran_description;
 		TransactionType = transactionType;
+		DateofTransaction = dateofTransaction;
 	}
-	
-	
 	public Transactions() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 }
