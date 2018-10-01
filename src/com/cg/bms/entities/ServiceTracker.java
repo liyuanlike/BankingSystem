@@ -1,8 +1,19 @@
 package com.cg.bms.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
+@Entity
 public class ServiceTracker {
 
-	private int Service_ID, Account_ID;
+	@Id
+	@SequenceGenerator(name="myseq", sequenceName="seq_serviceTracker_id", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="myseq")
+	private int Service_ID;
+	private int Account_ID;
 	private String Service_Description, Service_status;
 	
 	
@@ -11,10 +22,10 @@ public class ServiceTracker {
 	}
 	
 	
-	public ServiceTracker(int service_ID, int account_ID,
+	public ServiceTracker(int account_ID,
 			String service_Description, String service_status) {
 		super();
-		Service_ID = service_ID;
+		//Service_ID = service_ID;
 		Account_ID = account_ID;
 		Service_Description = service_Description;
 		Service_status = service_status;

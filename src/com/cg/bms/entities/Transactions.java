@@ -1,11 +1,26 @@
 package com.cg.bms.entities;
 
+import java.sql.Date;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="TRANSACTIONS")
 public class Transactions {
 
-	private int Transaction_ID, TranAmount, Account_No;
+	@Id
+	private int Transaction_ID;
+	private int TranAmount, Account_No;
 	private String Tran_description, TransactionType;
+	private Date  DateOfTransaction;
 	
 	
+	public Date getDateOfTransaction() {
+		return DateOfTransaction;
+	}
+	public void setDateOfTransaction(Date dateOfTransaction) {
+		DateOfTransaction = dateOfTransaction;
+	}
 	public int getTransaction_ID() {
 		return Transaction_ID;
 	}
@@ -51,7 +66,8 @@ public class Transactions {
 		return "Transactions [Transaction_ID=" + Transaction_ID
 				+ ", TranAmount=" + TranAmount + ", Account_No=" + Account_No
 				+ ", Tran_description=" + Tran_description
-				+ ", TransactionType=" + TransactionType + "]";
+				+ ", TransactionType=" + TransactionType
+				+ ", DateOfTransaction=" + DateOfTransaction + "]";
 	}
 	
 	

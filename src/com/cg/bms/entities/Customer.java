@@ -1,8 +1,14 @@
 package com.cg.bms.entities;
 
-public class Customer {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-	private String Customer_name, Email, Address, Pancard;
+@Entity
+public class Customer 
+{
+	@Id
+	private String  Pancard;
+	private String Customer_name, Email, Address;
 
 	public String getCustomer_name() {
 		return Customer_name;

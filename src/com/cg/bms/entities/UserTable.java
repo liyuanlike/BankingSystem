@@ -1,8 +1,12 @@
 package com.cg.bms.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class UserTable 
 {
-	
+	@Id
 	private int user_ID;
 	private String login_Password, secret_Question, transaction_Password, lock_Status, pancard;
 	public int getUser_ID() {
