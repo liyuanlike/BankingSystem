@@ -1,0 +1,29 @@
+create table AccountMaster(Account_ID NUMBER(10) Primary Key,user_id NUMBER,Account_Type VARCHAR2(25), Account_Balance NUMBER(15) ,Open_Date DATE,constraint amfk foreign key(user_id) references UserTable(user_id));
+
+
+create table Customer(customer_name VARCHAR2(50), Email VARCHAR2(30), Address VARCHAR2(100), Pancard VARCHAR2(15) primary key);
+
+create table Transactions(Transaction_ID NUMBER primary key,Tran_description VARCHAR2(100),DateofTransaction DATE,TransactionType VARCHAR2(1),TranAmount NUMBER(15),Account_No NUMBER(10),constraint tfk foreign key(Account_No) references AccountMaster(Account_ID));
+
+create table ServiceTracker(Service_ID NUMBER primary key, Service_Description VARCHAR2(100),Account_ID NUMBER, Service_Raised_Date DATE ,Service_status VARCHAR2(20),constraint stfk foreign key(Account_ID) references AccountMaster(Account_ID) );	
+
+create table UserTable(user_id NUMBER primary key,login_password VARCHAR2(15),secret_question VARCHAR2(50),Transaction_password VARCHAR2(15),lock_status VARCHAR2(1), Pancard VARCHAR2(15), constraint utfk foreign key(Pancard)references Customer(Pancard ));
+
+create table Fund_Transfer(FundTransfer_ID NUMBER primary key,Account_ID NUMBER(10),Payee_Account_ID NUMBER(10), Date_Of_Transfer DATE, Transfer_Amount NUMBER(15),constraint ftfk foreign key(Account_ID) references AccountMaster(Account_ID));
+
+create table PayeeTable(Account_Id NUMBER ,Payee_Account_Id NUMBER, Nick_name VARCHAR2(40), constraint ptfk foreign key(Account_ID) references AccountMaster(Account_ID));
+
+
+
+
+
+insert into customer values('Purav ','im@gmail.com','Mumb','P1002');
+
+
+insert into usertable values(1001,'login','kolk', 'tnx','o','P1001');
+insert into usertable values(1002,'log','mumb', 'tnx','o','P1002');
+
+
+insert into accountmaster values(9001,'1001','savings',50000, sysdate);
+insert into accountmaster values(9002,'1001','current',40000, sysdate);
+insert into accountmaster values(9003,'1002','current',90000, sysdate);
