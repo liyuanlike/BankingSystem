@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 
 import com.cg.bms.entities.AccountMaster;
 import com.cg.bms.entities.Customer;
+import com.cg.bms.entities.PayeeTable;
 import com.cg.bms.entities.ServiceTracker;
 import com.cg.bms.entities.Transactions;
 import com.cg.bms.entities.UserTable;
@@ -62,15 +63,21 @@ public class BankingDaoImpl implements BankingDao
 		return tnx;
 	}
 	
+	public String getCurrentAddress(int userName)
+	{
+		UserTable user = em.find(UserTable.class,userName);
+		String pc=user.getPancard();
+		Customer cust=em.find(Customer.class,pc);
+		return cust.getAddress();
+		
+	}
+	
 	public String updateAddress(int userName)
 	{
 		UserTable user = em.find(UserTable.class,userName);
 		String pc=user.getPancard();
 		Customer cust=em.find(Customer.class,pc);
-		System.out.println(cust.getAddress());
-		System.out.println("Enter your Current Address");
-		String newAddress=sc.nextLine();
-		cust.setAddress(newAddress);
+		cust.setAddress(sc.nextLine());
 		em.getTransaction().begin();
 		em.merge(cust);
 		em.getTransaction().commit();
@@ -111,6 +118,72 @@ public class BankingDaoImpl implements BankingDao
 		List<ServiceTracker> serTracker = jpql.getResultList();
 		return serTracker;
 	}
+
+	@Override
+	public List<ServiceTracker> getServiceRequestById(int userName, int requestID) 
+	{
+		String query ="Select t from ServiceTracker t where t.Service_ID="+requestID
+				+" and t.Account_ID IN(Select a from AccountMaster a where a.User_ID="+userName+")";
+		TypedQuery<ServiceTracker> jpql = em.createQuery(query, ServiceTracker.class);
+		List<ServiceTracker> serTracker = jpql.getResultList();
+		return serTracker;
+	}
 	
+	public int getAcAvailableBalance(int fromAcChoice,int amt)
+	{
+		AccountMaster am = em.find(AccountMaster.class,fromAcChoice);
+		return am.getAccount_Balance();
+	}
+	public boolean checkTransactionPassword(int userName, String tnxPassword)
+	{
+		UserTable user = em.find(UserTable.class,userName);
+		if(user.getTransaction_Password().equals(tnxPassword))
+			return true;
+		else
+			return false;
+	}
+	public int fundTransfer(int toAcChoice,int fromAcChoice,int amt)
+	{
+		em.getTransaction().begin();
+		Transactions debit=new Transactions(amt,fromAcChoice,"Transfer to account number "+toAcChoice,"d");
+		em.persist(debit);
+		AccountMaster am = em.find(AccountMaster.class,fromAcChoice);
+		am.setAccount_Balance(am.getAccount_Balance()-amt);
+		em.merge(am);
+		int currBalance=am.getAccount_Balance();
+		Transactions credit=new Transactions(amt,toAcChoice,"Transfer from account number "+fromAcChoice,"c");
+		em.persist(credit);
+		am = em.find(AccountMaster.class,toAcChoice);
+		am.setAccount_Balance(am.getAccount_Balance()+amt);
+		em.merge(am);
+		em.getTransaction().commit();
+		return currBalance;
+	}
 	
+	public List<PayeeTable> PayeeAccountId(int userName)
+	{
+		String query="Select p from PayeeTable p where p.User_Id="+userName;
+		TypedQuery<PayeeTable> jpql = em.createQuery(query, PayeeTable.class);
+		List<PayeeTable> payeeList = jpql.getResultList();
+		return payeeList;
+	}
+	
+	public boolean isAccountExist(int account_no, int userName)
+	{
+		String query="Select a.Account_ID from AccountMaster a where a.Account_ID="+account_no+" and a.User_ID<>"+userName;
+		TypedQuery<Integer> jpql = em.createQuery(query, Integer.class);
+		List<Integer> payeeAc = jpql.getResultList();
+		if(payeeAc.isEmpty())
+			return false;
+		else
+			return true;
+	}
+	public String addPayee(int user_id,int payee_account_id,String nickname)
+	{
+		em.getTransaction().begin();
+		PayeeTable pt=new PayeeTable(user_id,payee_account_id,nickname);
+		em.persist(pt);
+		em.getTransaction().commit();
+		return payee_account_id+nickname;
+	}
 }

@@ -9,6 +9,8 @@ import javax.persistence.*;
 public class Transactions {
 
 	@Id
+	@SequenceGenerator(name="myseq", sequenceName="tnx_seq_id", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="myseq")
 	private int Transaction_ID;
 	private int TranAmount, Account_No;
 	private String Tran_description, TransactionType;
@@ -71,10 +73,9 @@ public class Transactions {
 	}
 	
 	
-	public Transactions(int transaction_ID, int tranAmount, int account_No,
+	public Transactions(int tranAmount, int account_No,
 			String tran_description, String transactionType) {
 		super();
-		Transaction_ID = transaction_ID;
 		TranAmount = tranAmount;
 		Account_No = account_No;
 		Tran_description = tran_description;
