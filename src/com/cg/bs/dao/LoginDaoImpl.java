@@ -3,9 +3,7 @@ package com.cg.bs.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
 import com.cg.bs.entities.UserTable;
 
 public class LoginDaoImpl implements LoginDao {
@@ -14,12 +12,11 @@ public class LoginDaoImpl implements LoginDao {
 	EntityManager em = emf.createEntityManager();
 	
 	@Override
-	public boolean verifyCredentials(int username, String password, String role) {
+	public boolean verifyCredentials(int username, String password) {
 		em.getTransaction().begin();
-		TypedQuery<Long> query = em.createQuery("SELECT COUNT(u.user_id) FROM UserTable u WHERE u.user_id = :id AND u.login_password = :pass AND u.role =:role", Long.class);
+		TypedQuery<Long> query = em.createQuery("SELECT COUNT(u.user_id) FROM UserTable u WHERE u.user_id = :id AND u.login_password = :pass", Long.class);
 	    query.setParameter("id", username);
-	    query.setParameter("pass", password); 
-	    query.setParameter("role", role); 
+	    query.setParameter("pass", password);  
 	    em.getTransaction().commit();
 	    return query.getSingleResult() > 0;
 		
@@ -58,6 +55,32 @@ public class LoginDaoImpl implements LoginDao {
 		em.merge(ut);
 		em.getTransaction().commit();
 	}
+
+	@Override
+	public boolean adminLogin(int id, String password) {
+		em.getTransaction().begin();
+		TypedQuery<Long> query = em.createQuery("SELECT COUNT(*) FROM Admin  WHERE adminId = :id AND password = :pass", Long.class);
+	    query.setParameter("id", id);
+	    query.setParameter("pass", password);  
+	    em.getTransaction().commit();
+	    return query.getSingleResult() > 0;
+		
+	}
+
+	@Override
+	public void updateUser(UserTable utNew, int username) {
+		em.getTransaction().begin();
+		UserTable ut = em.find(UserTable.class, username);
+		ut.setSecret_question(utNew.getSecret_question());
+		ut.setLogin_password(utNew.getLogin_password());
+		ut.setTransaction_password(utNew.getTransaction_password());
+		em.merge(ut);
+		em.getTransaction().commit();
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 
 

@@ -1,9 +1,17 @@
 package com.cg.bs.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Customer")
 public class Customer {
 
+	@Id
+	private String Pancard;
+	private String customer_name, Email, Address;
 	
-	private String customer_name, Email, Address, Pancard;
 	
 	
 	public Customer() {

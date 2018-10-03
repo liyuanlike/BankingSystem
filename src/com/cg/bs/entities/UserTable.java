@@ -2,23 +2,24 @@ package com.cg.bs.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class UserTable {
 	@Id
 	@Column(name="user_id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@SequenceGenerator(name="seq", sequenceName="seq_user_id", allocationSize=1)
 	private int user_id;
-	private String login_password, secret_question, Transaction_password, lock_status, Pancard, role;
+	private String login_password, secret_question, Transaction_password, lock_status, Pancard;
 	
 	
 	public UserTable() {
 		super();
 	}
-
-
-	
-
 
 	public UserTable(int user_id, String login_password,
 			String secret_question, String transaction_password,
@@ -30,7 +31,7 @@ public class UserTable {
 		Transaction_password = transaction_password;
 		this.lock_status = lock_status;
 		Pancard = pancard;
-		this.role = role;
+		
 	}
 
 
@@ -43,20 +44,12 @@ public class UserTable {
 				+ login_password + ", secret_question=" + secret_question
 				+ ", Transaction_password=" + Transaction_password
 				+ ", lock_status=" + lock_status + ", Pancard=" + Pancard
-				+ ", role=" + role + "]";
+				+ "]";
 	}
 
 
 
 
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
 
 	public int getUser_id() {
 		return user_id;

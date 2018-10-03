@@ -14,20 +14,32 @@ public class Login {
 	{
 		int choice;
 		lser = new LoginServiceImpl();
-		System.out.println("Select Your choice: "+"\n1)Login"+"\n2)Forgot Password");
+		System.out.println("Select your choice: "+"\n1)Login"+"\n2)Forgot Password");
 		choice = sc.nextInt();
 		switch(choice)
 		{
 		
-			case 1: lser.login();
+			case 1: System.out.println("You are ?"+"\n1)Admin"+"\n2)User");
+					int role = sc.nextInt();
+					switch(role)
+					{
+						case 1: lser.Adminlogin();
+								break;
+						case 2: lser.Userlogin();
+								break;
+						default: System.out.println("Invalid Input");
+								 break;
+					}
 					break;
-			case 2: 
-				    int username;
+			 
+			case 2:	int username;
 				    System.out.println("Enter Username: ");
 					username = sc.nextInt();
 					lser.forgotPassword(username);
 					break;
-			default:System.out.println("Invalid Input");
+					
+			default: System.out.println("Invalid Input");
+					 break;
 		}
   }
 }

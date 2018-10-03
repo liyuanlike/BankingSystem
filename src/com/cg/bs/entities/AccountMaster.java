@@ -3,22 +3,28 @@ package com.cg.bs.entities;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class AccountMaster {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+	@SequenceGenerator(name="seq", sequenceName="seq_account_id", allocationSize=1)
 	private int Account_ID;
 	private int user_id;
 	private String Account_Type;
-	private float Account_Balance;
+	private double Account_Balance;
 	Date open_date;
 	public AccountMaster() {
 		super();
 	}
+	
 	public AccountMaster(int account_ID, int user_id, String account_Type,
-			float account_Balance, Date open_date) {
+			double account_Balance, Date open_date) {
 		super();
 		Account_ID = account_ID;
 		this.user_id = user_id;
@@ -26,6 +32,7 @@ public class AccountMaster {
 		Account_Balance = account_Balance;
 		this.open_date = open_date;
 	}
+
 	public int getAccount_ID() {
 		return Account_ID;
 	}
@@ -44,12 +51,15 @@ public class AccountMaster {
 	public void setAccount_Type(String account_Type) {
 		Account_Type = account_Type;
 	}
-	public float getAccount_Balance() {
+	
+	public double getAccount_Balance() {
 		return Account_Balance;
 	}
-	public void setAccount_Balance(float account_Balance) {
+
+	public void setAccount_Balance(double account_Balance) {
 		Account_Balance = account_Balance;
 	}
+
 	public Date getOpen_date() {
 		return open_date;
 	}
