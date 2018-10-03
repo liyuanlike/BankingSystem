@@ -1,6 +1,8 @@
+create table Admin(adminId NUMBER primary key, password VARCHAR2(20));
+
 create table Customer(customer_name VARCHAR2(50), Email VARCHAR2(30), Address VARCHAR2(100), Pancard VARCHAR2(15) primary key);
 
-create table UserTable(user_id NUMBER primary key,login_password VARCHAR2(15),role VARCHAR2(15),secret_question VARCHAR2(50),Transaction_password VARCHAR2(15),lock_status VARCHAR2(1), Pancard VARCHAR2(15), constraint utfk foreign key(Pancard)references Customer(Pancard ));
+create table UserTable(user_id NUMBER primary key,login_password VARCHAR2(15),secret_question VARCHAR2(50),Transaction_password VARCHAR2(15),lock_status VARCHAR2(1), Pancard VARCHAR2(15), constraint utfk foreign key(Pancard)references Customer(Pancard ));
 
 create table AccountMaster(Account_ID NUMBER(10) Primary Key,user_id NUMBER,Account_Type VARCHAR2(25), Account_Balance NUMBER(15) ,Open_Date DATE,constraint amfk foreign key(user_id) references UserTable(user_id));
 
@@ -13,16 +15,16 @@ create table Fund_Transfer(FundTransfer_ID NUMBER primary key,Account_ID NUMBER(
 create table PayeeTable(Account_Id NUMBER ,Payee_Account_Id NUMBER, Nick_name VARCHAR2(40), constraint ptfk foreign key(Account_ID) references AccountMaster(Account_ID));
 
 
-
+insert into Admin values(10,'root');
 
 insert into customer values('Rishav ','r@gmail.com','Mumb','P1001');
 insert into customer values('Purav ','im@gmail.com','Mumb','P1002');
 insert into customer values('Harshi','h@gmail.com','Mumb','P1003');
 
 
-insert into usertable values(1001,'root','admin','root', 'tnx','o','P1001');
-insert into usertable values(1002,'admin','user','admin', 'tnx','o','P1002');
-insert into usertable values(1003,'abc','user','user', 'tnx','o','P1003');
+insert into usertable values(1001,'root','root', 'tnx','o','P1001');
+insert into usertable values(1002,'admin','admin', 'tnx','o','P1002');
+insert into usertable values(1003,'abc','user', 'tnx','o','P1003');
 
 
 insert into accountmaster values(9001,'1001','savings',50000, sysdate);
