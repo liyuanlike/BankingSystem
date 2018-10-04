@@ -2,12 +2,16 @@ package com.cg.bs.service;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.persistence.TypedQuery;
 
 import com.cg.bs.dao.AdminDao;
 import com.cg.bs.dao.AdminDaoImpl;
 import com.cg.bs.entities.AccountMaster;
 import com.cg.bs.entities.Customer;
+import com.cg.bs.entities.Transactions;
 import com.cg.bs.entities.UserTable;
 
 public class AdminServiceImpl implements AdminService {
@@ -27,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 					break;
 			case 2: addAccount();
 					break;
-			case 3: viewTransaction();
+			case 3:  getPeriodicalTransaction();
 					break;
 			default: System.out.println("Invalid Input");
 					 break;
@@ -35,9 +39,22 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	private void viewTransaction() {
-		// TODO Auto-generated method stub
-		
+	public void getPeriodicalTransaction() 
+	{
+		System.out.println("Enter Start Date in DD-Mon-YY format:");
+		String startDate=sc.next();
+		System.out.println("Enter End Date in DD-Mon-YY format:");
+		String endDate=sc.next();
+		List<Transactions> tnx = adao.getPeriodicalTransaction(startDate, endDate);
+		if(!tnx.isEmpty())
+		{
+			System.out.println("Tnx ID\tTnx Date\tType\tAmount\tDescription");
+			for(Transactions t:tnx)
+				System.out.println(t.getTransaction_ID()+"\t"+t.getDateOfTransaction()
+									+"\t"+t.getTransactionType()+"\t"+t.getTranAmount()+"\t"+t.getTran_description());
+		}
+		else
+			System.out.println("No Transaction made by you till now.");
 	}
 
 	private void addAccount() {
