@@ -1,4 +1,4 @@
-package com.cg.bms.entities;
+package com.cg.bs.entities;
 
 import java.sql.Date;
 

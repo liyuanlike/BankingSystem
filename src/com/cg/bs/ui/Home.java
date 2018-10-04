@@ -1,4 +1,4 @@
-package com.cg.bms.ui;
+package com.cg.bs.ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,12 +9,12 @@ import java.util.Scanner;
 
 import javax.persistence.*;
 
-import com.cg.bms.entities.AccountMaster;
-import com.cg.bms.entities.PayeeTable;
-import com.cg.bms.entities.ServiceTracker;
-import com.cg.bms.entities.Transactions;
-import com.cg.bms.service.BankingService;
-import com.cg.bms.service.BankingServiceImpl;
+import com.cg.bs.entities.AccountMaster;
+import com.cg.bs.entities.PayeeTable;
+import com.cg.bs.entities.ServiceTracker;
+import com.cg.bs.entities.Transactions;
+import com.cg.bs.service.BankingService;
+import com.cg.bs.service.BankingServiceImpl;
 
 public class Home 
 {
@@ -22,10 +22,9 @@ public class Home
 	static Scanner sc = new Scanner(System.in);
 	
 	
-	public static void main(String args[])
+	public void UserHome(int userName)
 	//public void Home(int userName)
 	{
-		int userName=1001;
 		int acChoice;		//to store ac no on which operations to be operated
 		List<Transactions> tnx;
 		

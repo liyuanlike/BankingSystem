@@ -1,4 +1,4 @@
-package com.cg.bms.entities;
+package com.cg.bs.entities;
 
 public class Fund_Transfer {
 

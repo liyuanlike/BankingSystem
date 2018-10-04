@@ -1,4 +1,4 @@
-package com.cg.bms.dao;
+package com.cg.bs.dao;
 
 import java.util.*;
 
@@ -8,12 +8,12 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-import com.cg.bms.entities.AccountMaster;
-import com.cg.bms.entities.Customer;
-import com.cg.bms.entities.PayeeTable;
-import com.cg.bms.entities.ServiceTracker;
-import com.cg.bms.entities.Transactions;
-import com.cg.bms.entities.UserTable;
+import com.cg.bs.entities.AccountMaster;
+import com.cg.bs.entities.Customer;
+import com.cg.bs.entities.PayeeTable;
+import com.cg.bs.entities.ServiceTracker;
+import com.cg.bs.entities.Transactions;
+import com.cg.bs.entities.UserTable;
 
 
 public class BankingDaoImpl implements BankingDao
@@ -88,10 +88,10 @@ public class BankingDaoImpl implements BankingDao
 	public String changePassword(int userName, String oldPass, String newPass) 
 	{
 		UserTable user = em.find(UserTable.class,userName);
-		String pass=user.getLogin_Password();
+		String pass=user.getLogin_password();
 		if(oldPass.equals(pass))
 		{
-			user.setLogin_Password(newPass);
+			user.setLogin_password(newPass);
 			em.getTransaction().begin();
 			em.merge(user);
 			em.getTransaction().commit();
@@ -129,7 +129,7 @@ public class BankingDaoImpl implements BankingDao
 		return serTracker;
 	}
 	
-	public int getAcAvailableBalance(int fromAcChoice,int amt)
+	public double getAcAvailableBalance(int fromAcChoice,int amt)
 	{
 		AccountMaster am = em.find(AccountMaster.class,fromAcChoice);
 		return am.getAccount_Balance();
@@ -137,12 +137,12 @@ public class BankingDaoImpl implements BankingDao
 	public boolean checkTransactionPassword(int userName, String tnxPassword)
 	{
 		UserTable user = em.find(UserTable.class,userName);
-		if(user.getTransaction_Password().equals(tnxPassword))
+		if(user.getTransaction_password().equals(tnxPassword))
 			return true;
 		else
 			return false;
 	}
-	public int fundTransfer(int toAcChoice,int fromAcChoice,int amt)
+	public double fundTransfer(int toAcChoice,int fromAcChoice,int amt)
 	{
 		em.getTransaction().begin();
 		Transactions debit=new Transactions(amt,fromAcChoice,"Transfer to account number "+toAcChoice,"d");
@@ -150,7 +150,7 @@ public class BankingDaoImpl implements BankingDao
 		AccountMaster am = em.find(AccountMaster.class,fromAcChoice);
 		am.setAccount_Balance(am.getAccount_Balance()-amt);
 		em.merge(am);
-		int currBalance=am.getAccount_Balance();
+		double currBalance=am.getAccount_Balance();
 		Transactions credit=new Transactions(amt,toAcChoice,"Transfer from account number "+fromAcChoice,"c");
 		em.persist(credit);
 		am = em.find(AccountMaster.class,toAcChoice);

@@ -1,12 +1,12 @@
-package com.cg.bms.dao;
+package com.cg.bs.dao;
 
 import java.util.List;
 import java.util.Scanner;
 
-import com.cg.bms.entities.AccountMaster;
-import com.cg.bms.entities.PayeeTable;
-import com.cg.bms.entities.ServiceTracker;
-import com.cg.bms.entities.Transactions;
+import com.cg.bs.entities.AccountMaster;
+import com.cg.bs.entities.PayeeTable;
+import com.cg.bs.entities.ServiceTracker;
+import com.cg.bs.entities.Transactions;
 
 public interface BankingDao 
 {
@@ -25,8 +25,8 @@ public interface BankingDao
 	
 	public List<ServiceTracker> getAllServiceRequested(int accNo);
 	
-	public int getAcAvailableBalance(int fromAcChoice,int amt);
-	public int fundTransfer(int toAcChoice,int fromAcChoice,int amt);
+	public double getAcAvailableBalance(int fromAcChoice,int amt);
+	public double fundTransfer(int toAcChoice,int fromAcChoice,int amt);
 	public List<PayeeTable> PayeeAccountId(int userName);
 	
 	public String addPayee(int user_id,int payee_account_id,String nickname);

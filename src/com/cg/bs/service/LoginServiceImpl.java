@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.cg.bs.dao.LoginDao;
 import com.cg.bs.dao.LoginDaoImpl;
 import com.cg.bs.entities.UserTable;
+import com.cg.bs.ui.Home;
 
 public class LoginServiceImpl implements LoginService {
 
@@ -99,6 +100,8 @@ public class LoginServiceImpl implements LoginService {
 					else
 					{
 						System.out.println("Welcome "+username+" to Banking System");
+						Home uh = new Home();
+						uh.UserHome(username);
 						break;
 					}
 				}

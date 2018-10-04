@@ -49,8 +49,7 @@ public class AdminServiceImpl implements AdminService {
 		String lock_status = "o";
 		Calendar currenttime = Calendar.getInstance();
 	    Date sqldate = new Date((currenttime.getTime()).getTime());
-	    
-		Customer cust = new Customer(customer_name, Email, Address, Pancard);
+		Customer cust = new Customer(Pancard,customer_name, Email, Address );
 		adao.addCustomer(cust);
 		
 		UserTable ut = new UserTable();
@@ -63,7 +62,7 @@ public class AdminServiceImpl implements AdminService {
 		am.setAccount_Type(Account_Type);
 		am.setAccount_Balance(Account_Balance);
 		am.setOpen_date(sqldate);
-		am.setUser_id(ut.getUser_id());
+		am.setUser_ID(ut.getUser_id());
 		adao.addAccount(am);
 	}
 

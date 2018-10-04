@@ -1,11 +1,11 @@
-package com.cg.bms.service;
+package com.cg.bs.service;
 
 import java.util.List;
 
-import com.cg.bms.entities.AccountMaster;
-import com.cg.bms.entities.PayeeTable;
-import com.cg.bms.entities.ServiceTracker;
-import com.cg.bms.entities.Transactions;
+import com.cg.bs.entities.AccountMaster;
+import com.cg.bs.entities.PayeeTable;
+import com.cg.bs.entities.ServiceTracker;
+import com.cg.bs.entities.Transactions;
 
 public interface BankingService 
 {
@@ -20,8 +20,8 @@ public interface BankingService
 	public String chequeRequest(int accNo);
 	public List<ServiceTracker> getAllServiceRequested(int accNo);
 	public List<ServiceTracker> getServiceRequestById(int userName, int requestID);
-	public int getAcAvailableBalance(int fromAcChoice,int amt);
-	public int fundTransfer(int toAcChoice,int fromAcChoice,int amt);
+	public double getAcAvailableBalance(int fromAcChoice,int amt);
+	public double fundTransfer(int toAcChoice,int fromAcChoice,int amt);
 	public List<PayeeTable> getPayeeAccountId(int userName);
 	public String addPayee(int user_id,int payee_account_id,String nickname);
 	public boolean isAccountExist(int account_no, int userName);

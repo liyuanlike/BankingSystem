@@ -1,4 +1,4 @@
-package com.cg.bms.entities;
+package com.cg.bs.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -1,16 +1,16 @@
-package com.cg.bms.service;
+package com.cg.bs.service;
 
 import java.util.List;
 
 
 import java.util.Scanner;
 
-import com.cg.bms.dao.BankingDao;
-import com.cg.bms.dao.BankingDaoImpl;
-import com.cg.bms.entities.AccountMaster;
-import com.cg.bms.entities.PayeeTable;
-import com.cg.bms.entities.ServiceTracker;
-import com.cg.bms.entities.Transactions;
+import com.cg.bs.dao.BankingDao;
+import com.cg.bs.dao.BankingDaoImpl;
+import com.cg.bs.entities.AccountMaster;
+import com.cg.bs.entities.PayeeTable;
+import com.cg.bs.entities.ServiceTracker;
+import com.cg.bs.entities.Transactions;
 
 public class BankingServiceImpl implements BankingService
 {
@@ -85,11 +85,11 @@ public class BankingServiceImpl implements BankingService
 	{
 		return bDao.getServiceRequestById(userName, requestID);
 	}
-	public int getAcAvailableBalance(int fromAcChoice,int amt)
+	public double getAcAvailableBalance(int fromAcChoice,int amt)
 	{
 		return bDao.getAcAvailableBalance(fromAcChoice, amt);
 	}
-	public int fundTransfer(int toAcChoice,int fromAcChoice,int amt)
+	public double fundTransfer(int toAcChoice,int fromAcChoice,int amt)
 	{
 		return bDao.fundTransfer(toAcChoice,fromAcChoice, amt);
 	}
