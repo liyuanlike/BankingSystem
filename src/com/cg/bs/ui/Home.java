@@ -1,15 +1,8 @@
 package com.cg.bs.ui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
-import javax.persistence.*;
-
-import com.cg.bs.entities.AccountMaster;
 import com.cg.bs.entities.PayeeTable;
 import com.cg.bs.entities.ServiceTracker;
 import com.cg.bs.entities.Transactions;

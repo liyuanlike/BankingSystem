@@ -70,6 +70,7 @@ public class LoginDaoImpl implements LoginDao {
 	@Override
 	public void updateUser(UserTable utNew, int username) {
 		em.getTransaction().begin();
+		System.out.println(utNew);
 		UserTable ut = em.find(UserTable.class, username);
 		ut.setSecret_question(utNew.getSecret_question());
 		ut.setLogin_password(utNew.getLogin_password());

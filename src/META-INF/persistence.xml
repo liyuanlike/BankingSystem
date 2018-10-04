@@ -8,7 +8,7 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@10.51.103.201:1521:ORCL11G" />
-			<property name="javax.persistence.jdbc.user" value="lab1btrg11" />
+			<property name="javax.persistence.jdbc.user" value="lab1btrg10" />
 			<property name="javax.persistence.jdbc.password" value="lab1boracle" />
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
 		</properties>

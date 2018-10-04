@@ -19,36 +19,55 @@ public class AdminServiceImpl implements AdminService {
 	public void adminHome() {
 		
 		int operation;
-		System.out.println("Enter your choice: "+"\n1)Create new account"+"\n2)View Transactions");
+		System.out.println("Enter your choice: "+"\n1)Create new customer"+"\n2)Create account for existing user"+"\n3)View Transactions");
 		operation=sc.nextInt();
 		switch(operation)
 		{
-			case 1: addAccount();
+			case 1: addNewCustomer();
 					break;
+			case 2: addAccount();
+					break;
+			case 3: viewTransaction();
+					break;
+			default: System.out.println("Invalid Input");
+					 break;
 		}
 	}
 
+	
+	private void viewTransaction() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void addAccount() {
+		System.out.println("Enter User_Id of existing Customer");
+		int userId = sc.nextInt();
+		if(adao.chechUser(userId))
+		{
+			accountmaster(userId);
+		}
+		else
+			System.out.println("No such User. Please add user to continue.");
+	}
+
+	private void addNewCustomer() {
 		String customer_name, Email, Address, Pancard;
-		String Account_Type;
-		double Account_Balance;
+		
 		String login_password;
 		System.out.println("Enter Customer Name: ");
 		customer_name = sc.next();
 		System.out.println("Enter Email id: ");
 		Email = sc.next();
 		System.out.println("Enter Address: ");
+		//
 		Address = sc.next();
 		System.out.println("Enter Pan Card Number: ");
 		Pancard = sc.next();
-		System.out.println("Enter the Account Type: ");
-		Account_Type=sc.next();
-		System.out.println("Enter the Account Balance: ");
-		Account_Balance=sc.nextDouble();
+		
 		login_password="1asd40#";
 		String lock_status = "o";
-		Calendar currenttime = Calendar.getInstance();
-	    Date sqldate = new Date((currenttime.getTime()).getTime());
+		
 		Customer cust = new Customer(Pancard,customer_name, Email, Address );
 		adao.addCustomer(cust);
 		
@@ -57,13 +76,24 @@ public class AdminServiceImpl implements AdminService {
 		ut.setPancard(Pancard);
 		ut.setLock_status(lock_status);
 		adao.addUser(ut);
-		
+		accountmaster(ut.getUser_id());
+	}
+
+	public void accountmaster(int user_id) {
+		String Account_Type;
+		double Account_Balance;
+		System.out.println("Enter the Account Type: ");
+		Account_Type=sc.next();
+		System.out.println("Enter the Account Balance: ");
+		Account_Balance=sc.nextDouble();
+		Calendar currenttime = Calendar.getInstance();
+	    Date sqldate = new Date((currenttime.getTime()).getTime());
 		AccountMaster am = new AccountMaster();
 		am.setAccount_Type(Account_Type);
 		am.setAccount_Balance(Account_Balance);
 		am.setOpen_date(sqldate);
-		am.setUser_ID(ut.getUser_id());
+		am.setUser_ID(user_id);
 		adao.addAccount(am);
 	}
-
+	
 }

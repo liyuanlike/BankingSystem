@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import com.cg.bs.dao.BankingDao;
 import com.cg.bs.dao.BankingDaoImpl;
-import com.cg.bs.entities.AccountMaster;
 import com.cg.bs.entities.PayeeTable;
 import com.cg.bs.entities.ServiceTracker;
 import com.cg.bs.entities.Transactions;

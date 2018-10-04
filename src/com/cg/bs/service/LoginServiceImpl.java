@@ -30,6 +30,7 @@ public class LoginServiceImpl implements LoginService {
 			System.out.println("Enter Username: ");
 			username = sc.nextInt();
 			System.out.println("Enter Password: ");
+			
 			password = sc.next();
 			flag = verifyCredentials(username, password);
 			
@@ -47,8 +48,11 @@ public class LoginServiceImpl implements LoginService {
 					if(password.equals("sbq500#"))
 					{
 						System.out.println("Enter new password: ");
+						
 						String new_pass = sc.next();
+						System.out.println();
 						System.out.println("Confirm new password: ");
+						
 						String new_pass_conf = sc.next();
 						
 						//Confirm the new entered Password 
@@ -138,6 +142,7 @@ public class LoginServiceImpl implements LoginService {
 	public void forgotPassword(int username) 
 	{
 		System.out.println("Answer your Secret Question: ");
+		
 		String ans = sc.next();
 		String db_ans = ldao.checkSecretAns(username);
 		if(db_ans.equals(ans))

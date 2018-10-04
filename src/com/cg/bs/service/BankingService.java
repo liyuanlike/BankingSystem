@@ -2,7 +2,6 @@ package com.cg.bs.service;
 
 import java.util.List;
 
-import com.cg.bs.entities.AccountMaster;
 import com.cg.bs.entities.PayeeTable;
 import com.cg.bs.entities.ServiceTracker;
 import com.cg.bs.entities.Transactions;

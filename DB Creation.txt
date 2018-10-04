@@ -1,3 +1,5 @@
+******************************DB Creation********************************
+
 create table Admin(adminId NUMBER primary key, password VARCHAR2(20));
 
 create table Customer(customer_name VARCHAR2(50), Email VARCHAR2(30), Address VARCHAR2(100), Pancard VARCHAR2(15) primary key);
@@ -12,9 +14,20 @@ create table ServiceTracker(Service_ID NUMBER primary key, Service_Description V
 
 create table Fund_Transfer(FundTransfer_ID NUMBER primary key,Account_ID NUMBER(10),Payee_Account_ID NUMBER(10), Date_Of_Transfer DATE, Transfer_Amount NUMBER(15),constraint ftfk foreign key(Account_ID) references AccountMaster(Account_ID));
 
-create table PayeeTable(Account_Id NUMBER ,Payee_Account_Id NUMBER, Nick_name VARCHAR2(40), constraint ptfk foreign key(Account_ID) references AccountMaster(Account_ID));
+create table PayeeTable(User_Id NUMBER ,Payee_Account_Id NUMBER, Nick_name VARCHAR2(40), constraint ptfk primary key(User_Id,Payee_Account_Id));
 
 
+
+*********************************Sequences*************************************
+create sequence seq_account_id start with 9000;
+
+create sequence seq_serviceTracker_id start with 7000;
+
+create sequence tnx_seq_id start with 55000;
+
+create sequence seq_user_id start with 1000;
+
+*********************************Data*******************************************
 insert into Admin values(10,'root');
 
 insert into customer values('Rishav ','r@gmail.com','Mumb','P1001');

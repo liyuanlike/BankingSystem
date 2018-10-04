@@ -2,7 +2,6 @@ package com.cg.bs.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 public class Customer 
@@ -31,6 +30,11 @@ public class Customer
 
 	public String getEmail() {
 		return Email;
+	}
+
+	public Customer() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public void setEmail(String email) {

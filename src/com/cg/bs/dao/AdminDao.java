@@ -10,4 +10,6 @@ public interface AdminDao {
 	public void addUser(UserTable ut);
 
 	public void addAccount(AccountMaster am);
+
+	public boolean chechUser(int userId);
 }
