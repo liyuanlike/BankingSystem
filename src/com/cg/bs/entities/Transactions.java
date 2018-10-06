@@ -76,6 +76,7 @@ public class Transactions {
 	public Transactions(int tranAmount, int account_No,
 			String tran_description, String transactionType) {
 		super();
+		DateOfTransaction = new Date(new java.util.Date().getTime());
 		TranAmount = tranAmount;
 		Account_No = account_No;
 		Tran_description = tran_description;
